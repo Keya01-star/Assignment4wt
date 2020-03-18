@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Registration-Form</title>
+
+<script>
+ 
+        function display() {
+        if(validate_form()){
+            DispWin = window.open('','NewWin', 'toolbar=no,status=no,width=300,height=200')
+            message = "<ul><li><b>Name: </b>" + document.getElementById("myinput1").value;
+          
+           message += "<li><b>Phone Number: </b>" + document.getElementById("myinput2").value;
+            message += "<li><b>Email: </b>" + document.getElementById("myinput3").value;
+            
+              message += "<li><b>Gender: </b>" + displayRadioValue();
+            DispWin.document.write(message);
+            }
+        }
+        function validate_form() {
+            var phoneno = /^\d{10}$/;
+
+            if(!(document.getElementById("myinput2").value.match(phoneno))){
+                alert("phone number is wrong.");
+                return false;
+            }
+
+            if (document.getElementById("myinput1").value == "") {
+                alert("Please fill Your Name");
+                return false;
+            }
+
+            if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(document.getElementById("myinput3").value)) {
+                alert("You have entered an invalid email address!")
+                return false
+            }
+            alert("sucessfully Submitted");
+            return true;
+        }
+        function displayRadioValue() { 
+            var ele = document.getElementsByName('gn'); 
+                if(ele[0].checked) 
+                        return "Male"; 
+                else
+                        return "Female";
+        } 
+      function blurFunction() 
+       { 
+       	document.getElementById("myinput1").style.background = "skyblue";
+       	var x;
+    	x = document.getElementById("myinput1");
+    	x.value = x.value.toUpperCase();
+       }
+        
+</script>
+<style>
+body{
+	
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-image: url(assign4.jpg);
+	background-size:cover;
+}
+.myForm {
+font-family: "Lucida Sans Unicode";
+font-size: 0.8em;
+width: 30em;
+padding: 1em;
+border: 1px solid #ccc;
+color: black;
+background-color: white;
+}
+.form{
+	position: absolute;
+	left: 10%;
+	top: 1%;
+}
+.col{
+	border: 5px solid black;
+	color: white;
+	font-family: cursive;
+}
+.myForm * {
+box-sizing: border-box;
+}
+.myForm fieldset {
+border: none;
+padding: 0;
+}
+.myForm legend,
+.myForm label {
+font-weight: bold;
+}
+.myForm label.choice {
+font-size: 0.9em;
+font-weight: normal;
+}
+.myForm label {
+text-align: left;
+display: block;
+}
+.myForm input[type="text"],
+.myForm input[type="tel"],
+.myForm input[type="email"],
+.myForm input[type="Password"],
+.myForm select,
+.myForm textarea {
+float: right;
+width: 60%;
+border: 1px solid #ccc;
+font-family: "Lucida Sans Unicode";
+font-size: 1em;
+padding: 0.3em;
+}
+.myForm textarea {
+height: 100px;
+}
+.myForm input[type="radio"],
+.myForm input[type="checkbox"] {
+margin-left: 40%;
+}
+.myForm button {
+padding: 1em;
+border-radius: 0.5em;
+background:lightgrey ;
+border: none;
+font-weight: bold;
+margin-left: 40%;
+margin-top: 1.8em;
+}
+.myForm button:hover {
+background: grey;
+cursor: pointer;
+}
+</style>
+</head>
+<body>
+	<div class="background"></div>
+<div class="form">
+<fieldset class="col">
+	<legend><h1 style="color: black;">R E G I S T R A T I O N -F 0 R M</h1></legend>
+<form class="myForm" method="post" enctype="application/x-www-form-urlencoded" action="/html/codes/html_form_handler.cfm">
+<p>
+<label>Name
+<input type="text" id = "myinput1" name="fname"  required onblur="blurFunction()" onblur = "myFunction()">
+</label> 
+</p>
+<p>
+<label>Phone 
+<input type="tel" maxlength="10" name="ph"  required id="myinput2">
+</label>
+</p>
+<p>
+<label>Email 
+<input type="email" name="email" id="myinput3" >
+</label>
+</p>
+<p>
+	<label>Password
+		<input type="Password" pattern="[A-Za-Z1-9]{8}"name="pw" required id="pw">
+<fieldset>
+<legend>gender</legend>
+<p><label class="choice"> <input type="radio" name="gn" id="myinput4"> Male </label></p>
+<p><label class="choice"> <input type="radio" name="gn" id="myinput4" > Female </label></p>
+<p><label class="choice"> <input type="radio" name="gn" id = "myinput4"> Other </label></p>
+</fieldset>
+<!--<fieldset>
+<legend>Feedback</legend>
+<p><label class="choice"> <input type="radio" name="taxi" required value="car"> poor </label></p>
+<p><label class="choice"> <input type="radio" name="taxi" required value="van"> good </label></p>
+<p><label class="choice"> <input type="radio" name="taxi" required value="vane"> very good </label></p>
+<p><label class="choice"> <input type="radio" name="taxi" required value="vane"> excellent </label></p>
+</fieldset>
+<p>
+<label>Date/Time
+<input type="datetime-local" name="pickup_time" required>
+</label>
+</p>
+<p>
+<label>Course Name
+<select id="pickup_place" name="pickup_place">
+<option value="" selected="selected">Select One</option>
+<option value="office" >DBMS</option>
+<option value="town_hall" >DSA</option>
+<option value="guess" >OS</option>
+<option value="guess1" >CO</option>
+</select>
+</label> 
+</p>
+<p>
+<label>Teacher name
+<input type="text" name="dropoff_place" required list="destinations">
+</label>
+<datalist id="destinations">
+<option value="Mayuri Popat"></option>
+<option value="Ronak Patel"></option>
+<option value="Nikita Bhatt"></option>
+<option value="Ritesh Patel"></option>
+
+
+</datalist>
+</p>
+<p>
+<label>Point to write improve Teaching System
+<p></p>
+<textarea name="comments" maxlength="500" placeholder="comments"></textarea>
+</label>-->
+</p>
+<p><button onclick="display()">Submit</button></p>
+</form>
+</fieldset>
+</div>
+</body>
+</html>
+
